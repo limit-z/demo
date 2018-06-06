@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainxing.app.mapper.CustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.rainxing.app.pojo.Customer" >
+    <id column="AutoID" property="autoID" jdbcType="VARCHAR" />
+    <result column="CustomerType" property="customerType" jdbcType="INTEGER" />
+    <result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="Area" property="area" jdbcType="VARCHAR" />
+    <result column="Street" property="street" jdbcType="VARCHAR" />
+    <result column="CompanyName" property="companyName" jdbcType="VARCHAR" />
+    <result column="CertificationID" property="certificationID" jdbcType="VARCHAR" />
+    <result column="OrganID" property="organID" jdbcType="VARCHAR" />
+    <result column="OrganName" property="organName" jdbcType="VARCHAR" />
+    <result column="DepartmentID" property="departmentID" jdbcType="VARCHAR" />
+    <result column="DepartmentName" property="departmentName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    AutoID, CustomerType, IsDelete, CreateTime, Area, Street, CompanyName, CertificationID, 
+    OrganID, OrganName, DepartmentID, DepartmentName
+  </sql>
+  <!-- get查询所有 -->
+  <select id="getCustomerAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from customer
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.rainxing.app.pojo.Customer" >
+    insert into customer (AutoID, CustomerType, IsDelete, 
+      CreateTime, Area, Street, 
+      CompanyName, CertificationID, OrganID, 
+      OrganName, DepartmentID, DepartmentName
+      )
+    values (#{autoID,jdbcType=VARCHAR}, #{customerType,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{certificationID,jdbcType=VARCHAR}, #{organID,jdbcType=VARCHAR}, 
+      #{organName,jdbcType=VARCHAR}, #{departmentID,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rainxing.app.pojo.Customer" >
+    insert into customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="autoID != null" >
+        AutoID,
+      </if>
+      <if test="customerType != null" >
+        CustomerType,
+      </if>
+      <if test="isDelete != null" >
+        IsDelete,
+      </if>
+      <if test="createTime != null" >
+        CreateTime,
+      </if>
+      <if test="area != null" >
+        Area,
+      </if>
+      <if test="street != null" >
+        Street,
+      </if>
+      <if test="companyName != null" >
+        CompanyName,
+      </if>
+      <if test="certificationID != null" >
+        CertificationID,
+      </if>
+      <if test="organID != null" >
+        OrganID,
+      </if>
+      <if test="organName != null" >
+        OrganName,
+      </if>
+      <if test="departmentID != null" >
+        DepartmentID,
+      </if>
+      <if test="departmentName != null" >
+        DepartmentName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="autoID != null" >
+        #{autoID,jdbcType=VARCHAR},
+      </if>
+      <if test="customerType != null" >
+        #{customerType,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null" >
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificationID != null" >
+        #{certificationID,jdbcType=VARCHAR},
+      </if>
+      <if test="organID != null" >
+        #{organID,jdbcType=VARCHAR},
+      </if>
+      <if test="organName != null" >
+        #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentID != null" >
+        #{departmentID,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null" >
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rainxing.app.pojo.Customer" >
+    update customer
+    <set >
+      <if test="customerType != null" >
+        CustomerType = #{customerType,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        IsDelete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null" >
+        Area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null" >
+        Street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        CompanyName = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificationID != null" >
+        CertificationID = #{certificationID,jdbcType=VARCHAR},
+      </if>
+      <if test="organID != null" >
+        OrganID = #{organID,jdbcType=VARCHAR},
+      </if>
+      <if test="organName != null" >
+        OrganName = #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentID != null" >
+        DepartmentID = #{departmentID,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null" >
+        DepartmentName = #{departmentName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rainxing.app.pojo.Customer" >
+    update customer
+    set CustomerType = #{customerType,jdbcType=INTEGER},
+      IsDelete = #{isDelete,jdbcType=INTEGER},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      Area = #{area,jdbcType=VARCHAR},
+      Street = #{street,jdbcType=VARCHAR},
+      CompanyName = #{companyName,jdbcType=VARCHAR},
+      CertificationID = #{certificationID,jdbcType=VARCHAR},
+      OrganID = #{organID,jdbcType=VARCHAR},
+      OrganName = #{organName,jdbcType=VARCHAR},
+      DepartmentID = #{departmentID,jdbcType=VARCHAR},
+      DepartmentName = #{departmentName,jdbcType=VARCHAR}
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </update>
+</mapper>

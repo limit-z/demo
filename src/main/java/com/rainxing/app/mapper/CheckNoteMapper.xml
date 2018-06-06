@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainxing.app.mapper.CheckNoteMapper" >
+  <resultMap id="BaseResultMap" type="com.rainxing.app.pojo.CheckNote" >
+    <id column="AutoID" property="autoID" jdbcType="VARCHAR" />
+    <result column="CheckID" property="checkID" jdbcType="VARCHAR" />
+    <result column="CustomerID" property="customerID" jdbcType="VARCHAR" />
+    <result column="CheckPerson" property="checkPerson" jdbcType="VARCHAR" />
+    <result column="CheckedPerson" property="checkedPerson" jdbcType="VARCHAR" />
+    <result column="CheckTime" property="checkTime" jdbcType="TIMESTAMP" />
+    <result column="CheckedTime" property="checkedTime" jdbcType="TIMESTAMP" />
+    <result column="CheckState" property="checkState" jdbcType="INTEGER" />
+    <result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.rainxing.app.pojo.CheckNote" extends="BaseResultMap" >
+    <result column="AuditReason" property="auditReason" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    AutoID, CheckID, CustomerID, CheckPerson, CheckedPerson, CheckTime, CheckedTime, 
+    CheckState, IsDelete, CreateTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    AuditReason
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from checknote
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from checknote
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.rainxing.app.pojo.CheckNote" >
+    insert into checknote (AutoID, CheckID, CustomerID, 
+      CheckPerson, CheckedPerson, CheckTime, 
+      CheckedTime, CheckState, IsDelete, 
+      CreateTime, AuditReason)
+    values (#{autoID,jdbcType=VARCHAR}, #{checkID,jdbcType=VARCHAR}, #{customerID,jdbcType=VARCHAR}, 
+      #{checkPerson,jdbcType=VARCHAR}, #{checkedPerson,jdbcType=VARCHAR}, #{checkTime,jdbcType=TIMESTAMP}, 
+      #{checkedTime,jdbcType=TIMESTAMP}, #{checkState,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{auditReason,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rainxing.app.pojo.CheckNote" >
+    insert into checknote
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="autoID != null" >
+        AutoID,
+      </if>
+      <if test="checkID != null" >
+        CheckID,
+      </if>
+      <if test="customerID != null" >
+        CustomerID,
+      </if>
+      <if test="checkPerson != null" >
+        CheckPerson,
+      </if>
+      <if test="checkedPerson != null" >
+        CheckedPerson,
+      </if>
+      <if test="checkTime != null" >
+        CheckTime,
+      </if>
+      <if test="checkedTime != null" >
+        CheckedTime,
+      </if>
+      <if test="checkState != null" >
+        CheckState,
+      </if>
+      <if test="isDelete != null" >
+        IsDelete,
+      </if>
+      <if test="createTime != null" >
+        CreateTime,
+      </if>
+      <if test="auditReason != null" >
+        AuditReason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="autoID != null" >
+        #{autoID,jdbcType=VARCHAR},
+      </if>
+      <if test="checkID != null" >
+        #{checkID,jdbcType=VARCHAR},
+      </if>
+      <if test="customerID != null" >
+        #{customerID,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPerson != null" >
+        #{checkPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="checkedPerson != null" >
+        #{checkedPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null" >
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkedTime != null" >
+        #{checkedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkState != null" >
+        #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditReason != null" >
+        #{auditReason,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rainxing.app.pojo.CheckNote" >
+    update checknote
+    <set >
+      <if test="checkID != null" >
+        CheckID = #{checkID,jdbcType=VARCHAR},
+      </if>
+      <if test="customerID != null" >
+        CustomerID = #{customerID,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPerson != null" >
+        CheckPerson = #{checkPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="checkedPerson != null" >
+        CheckedPerson = #{checkedPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null" >
+        CheckTime = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkedTime != null" >
+        CheckedTime = #{checkedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkState != null" >
+        CheckState = #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        IsDelete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditReason != null" >
+        AuditReason = #{auditReason,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.rainxing.app.pojo.CheckNote" >
+    update checknote
+    set CheckID = #{checkID,jdbcType=VARCHAR},
+      CustomerID = #{customerID,jdbcType=VARCHAR},
+      CheckPerson = #{checkPerson,jdbcType=VARCHAR},
+      CheckedPerson = #{checkedPerson,jdbcType=VARCHAR},
+      CheckTime = #{checkTime,jdbcType=TIMESTAMP},
+      CheckedTime = #{checkedTime,jdbcType=TIMESTAMP},
+      CheckState = #{checkState,jdbcType=INTEGER},
+      IsDelete = #{isDelete,jdbcType=INTEGER},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      AuditReason = #{auditReason,jdbcType=LONGVARCHAR}
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rainxing.app.pojo.CheckNote" >
+    update checknote
+    set CheckID = #{checkID,jdbcType=VARCHAR},
+      CustomerID = #{customerID,jdbcType=VARCHAR},
+      CheckPerson = #{checkPerson,jdbcType=VARCHAR},
+      CheckedPerson = #{checkedPerson,jdbcType=VARCHAR},
+      CheckTime = #{checkTime,jdbcType=TIMESTAMP},
+      CheckedTime = #{checkedTime,jdbcType=TIMESTAMP},
+      CheckState = #{checkState,jdbcType=INTEGER},
+      IsDelete = #{isDelete,jdbcType=INTEGER},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP}
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainxing.app.mapper.CustomorchecktypeMapper" >
+  <resultMap id="BaseResultMap" type="com.rainxing.app.pojo.Customorchecktype" >
+    <id column="AutoID" property="autoID" jdbcType="VARCHAR" />
+    <result column="ParentID" property="parentID" jdbcType="VARCHAR" />
+    <result column="ItemType" property="itemType" jdbcType="VARCHAR" />
+    <result column="ItemName" property="itemName" jdbcType="VARCHAR" />
+    <result column="ItemValue" property="itemValue" jdbcType="VARCHAR" />
+    <result column="ItemMemo" property="itemMemo" jdbcType="VARCHAR" />
+    <result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    AutoID, ParentID, ItemType, ItemName, ItemValue, ItemMemo, IsDelete, CreateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from customorchecktype
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from customorchecktype
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.rainxing.app.pojo.Customorchecktype" >
+    insert into customorchecktype (AutoID, ParentID, ItemType, 
+      ItemName, ItemValue, ItemMemo, 
+      IsDelete, CreateTime)
+    values (#{autoID,jdbcType=VARCHAR}, #{parentID,jdbcType=VARCHAR}, #{itemType,jdbcType=VARCHAR}, 
+      #{itemName,jdbcType=VARCHAR}, #{itemValue,jdbcType=VARCHAR}, #{itemMemo,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rainxing.app.pojo.Customorchecktype" >
+    insert into customorchecktype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="autoID != null" >
+        AutoID,
+      </if>
+      <if test="parentID != null" >
+        ParentID,
+      </if>
+      <if test="itemType != null" >
+        ItemType,
+      </if>
+      <if test="itemName != null" >
+        ItemName,
+      </if>
+      <if test="itemValue != null" >
+        ItemValue,
+      </if>
+      <if test="itemMemo != null" >
+        ItemMemo,
+      </if>
+      <if test="isDelete != null" >
+        IsDelete,
+      </if>
+      <if test="createTime != null" >
+        CreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="autoID != null" >
+        #{autoID,jdbcType=VARCHAR},
+      </if>
+      <if test="parentID != null" >
+        #{parentID,jdbcType=VARCHAR},
+      </if>
+      <if test="itemType != null" >
+        #{itemType,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemValue != null" >
+        #{itemValue,jdbcType=VARCHAR},
+      </if>
+      <if test="itemMemo != null" >
+        #{itemMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rainxing.app.pojo.Customorchecktype" >
+    update customorchecktype
+    <set >
+      <if test="parentID != null" >
+        ParentID = #{parentID,jdbcType=VARCHAR},
+      </if>
+      <if test="itemType != null" >
+        ItemType = #{itemType,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null" >
+        ItemName = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemValue != null" >
+        ItemValue = #{itemValue,jdbcType=VARCHAR},
+      </if>
+      <if test="itemMemo != null" >
+        ItemMemo = #{itemMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        IsDelete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rainxing.app.pojo.Customorchecktype" >
+    update customorchecktype
+    set ParentID = #{parentID,jdbcType=VARCHAR},
+      ItemType = #{itemType,jdbcType=VARCHAR},
+      ItemName = #{itemName,jdbcType=VARCHAR},
+      ItemValue = #{itemValue,jdbcType=VARCHAR},
+      ItemMemo = #{itemMemo,jdbcType=VARCHAR},
+      IsDelete = #{isDelete,jdbcType=INTEGER},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP}
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </update>
+</mapper>

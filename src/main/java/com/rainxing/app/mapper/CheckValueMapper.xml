@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainxing.app.mapper.CheckValueMapper" >
+  <resultMap id="BaseResultMap" type="com.rainxing.app.pojo.CheckValue" >
+    <result column="AutoID" property="autoID" jdbcType="VARCHAR" />
+    <result column="CustomerID" property="customerID" jdbcType="VARCHAR" />
+    <result column="CheckID" property="checkID" jdbcType="VARCHAR" />
+    <result column="ItemID" property="itemID" jdbcType="VARCHAR" />
+    <result column="ItemType" property="itemType" jdbcType="VARCHAR" />
+    <result column="ItemName" property="itemName" jdbcType="VARCHAR" />
+    <result column="ItemValue" property="itemValue" jdbcType="VARCHAR" />
+    <result column="ItemMemo" property="itemMemo" jdbcType="VARCHAR" />
+    <result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    AutoID, CustomerID, CheckID, 
+      ItemID, ItemType, ItemName, 
+      ItemValue, ItemMemo, IsDelete, 
+      CreateTime
+  </sql>
+  <!-- 通过外键企业ID查询所有企业ID下的检查表信息 -->
+  <select id="getAllByID" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from checkvalue
+    where CustomerID= #{customerID}
+  </select>
+  <!-- 通过检查表外键CheckID（检查表主键）查询检查表信息  -->
+  <select id="getAllByCheckID" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from checkvalue
+    where CheckID= #{checkID}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from checkvalue
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </select>
+   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from checkvalue
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.rainxing.app.pojo.CheckValue" >
+    insert into checkvalue (AutoID, CustomerID, CheckID, 
+      ItemID, ItemType, ItemName, 
+      ItemValue, ItemMemo, IsDelete, 
+      CreateTime)
+    values (#{autoID,jdbcType=VARCHAR}, #{customerID,jdbcType=VARCHAR}, #{checkID,jdbcType=VARCHAR}, 
+      #{itemID,jdbcType=VARCHAR}, #{itemType,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, 
+      #{itemValue,jdbcType=VARCHAR}, #{itemMemo,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rainxing.app.pojo.CheckValue" >
+    insert into checkvalue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="autoID != null" >
+        AutoID,
+      </if>
+      <if test="customerID != null" >
+        CustomerID,
+      </if>
+      <if test="checkID != null" >
+        CheckID,
+      </if>
+      <if test="itemID != null" >
+        ItemID,
+      </if>
+      <if test="itemType != null" >
+        ItemType,
+      </if>
+      <if test="itemName != null" >
+        ItemName,
+      </if>
+      <if test="itemValue != null" >
+        ItemValue,
+      </if>
+      <if test="itemMemo != null" >
+        ItemMemo,
+      </if>
+      <if test="isDelete != null" >
+        IsDelete,
+      </if>
+      <if test="createTime != null" >
+        CreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="autoID != null" >
+        #{autoID,jdbcType=VARCHAR},
+      </if>
+      <if test="customerID != null" >
+        #{customerID,jdbcType=VARCHAR},
+      </if>
+      <if test="checkID != null" >
+        #{checkID,jdbcType=VARCHAR},
+      </if>
+      <if test="itemID != null" >
+        #{itemID,jdbcType=VARCHAR},
+      </if>
+      <if test="itemType != null" >
+        #{itemType,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemValue != null" >
+        #{itemValue,jdbcType=VARCHAR},
+      </if>
+      <if test="itemMemo != null" >
+        #{itemMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

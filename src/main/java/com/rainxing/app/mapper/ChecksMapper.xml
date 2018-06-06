@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainxing.app.mapper.ChecksMapper" >
+  <resultMap id="BaseResultMap" type="com.rainxing.app.pojo.Checks" >
+    <result column="AutoID" property="autoID" jdbcType="VARCHAR" />
+    <result column="CheckType" property="checkType" jdbcType="INTEGER" />
+    <result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CheckPerson" property="checkPerson" jdbcType="VARCHAR" />
+    <result column="CompanyName" property="companyName" jdbcType="VARCHAR" />
+    <result column="OrganID" property="organID" jdbcType="VARCHAR" />
+    <result column="OrganName" property="organName" jdbcType="VARCHAR" />
+    <result column="DepartmentID" property="departmentID" jdbcType="VARCHAR" />
+    <result column="DepartmentName" property="departmentName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    AutoID, CheckType, IsDelete, 
+      CreateTime, CheckPerson, CompanyName, 
+      OrganID, OrganName, DepartmentID, 
+      DepartmentName
+  </sql>
+  <!-- 通过企业名字查询检查表数据   -->
+  <select id="findByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from checks
+    where CompanyName = #{cname}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from checks
+    where AutoID = #{autoID,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.rainxing.app.pojo.Checks" >
+    insert into checks (AutoID, CheckType, IsDelete, 
+      CreateTime, CheckPerson, CompanyName, 
+      OrganID, OrganName, DepartmentID, 
+      DepartmentName)
+    values (#{autoID,jdbcType=VARCHAR}, #{checkType,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{checkPerson,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{organID,jdbcType=VARCHAR}, #{organName,jdbcType=VARCHAR}, #{departmentID,jdbcType=VARCHAR}, 
+      #{departmentName,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.rainxing.app.pojo.Checks" >
+    insert into checks
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="autoID != null" >
+        AutoID,
+      </if>
+      <if test="checkType != null" >
+        CheckType,
+      </if>
+      <if test="isDelete != null" >
+        IsDelete,
+      </if>
+      <if test="createTime != null" >
+        CreateTime,
+      </if>
+      <if test="checkPerson != null" >
+        CheckPerson,
+      </if>
+      <if test="companyName != null" >
+        CompanyName,
+      </if>
+      <if test="organID != null" >
+        OrganID,
+      </if>
+      <if test="organName != null" >
+        OrganName,
+      </if>
+      <if test="departmentID != null" >
+        DepartmentID,
+      </if>
+      <if test="departmentName != null" >
+        DepartmentName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="autoID != null" >
+        #{autoID,jdbcType=VARCHAR},
+      </if>
+      <if test="checkType != null" >
+        #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkPerson != null" >
+        #{checkPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="organID != null" >
+        #{organID,jdbcType=VARCHAR},
+      </if>
+      <if test="organName != null" >
+        #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentID != null" >
+        #{departmentID,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null" >
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
